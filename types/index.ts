@@ -22,7 +22,7 @@ export type MovieResponse = {
     overview: string;
     poster_path: string;
     media_type: string;
-    genre_ids: number[];
+    genre_ids: GenreResponse[];
     popularity: number;
     release_date: string;
     video: boolean;
@@ -78,14 +78,26 @@ export type MovieDetailsResponse = {
   vote_count: number;
 };
 
-export type MovieImagesResponse = {
-  backdrops: {
-    aspect_ratio: number;
-    height: number;
-    iso_639_1: string;
-    file_path: string;
-    vote_average: number;
-    vote_count: number;
-    width: number;
-  }[]
+export type VideoResponse = {
+  id: number;
+  results: Video[];
+};
+
+export type Video = {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string; 
+  site: "YouTube" | "Vimeo";
+  size: 360 | 480 | 720 | 1080;
+  type:
+    | "Trailer"
+    | "Teaser"
+    | "Clip"
+    | "Featurette"
+    | "Behind the Scenes"
+    | "Bloopers";
+  official: boolean;
+  published_at: string;
+  id: string;
 };
