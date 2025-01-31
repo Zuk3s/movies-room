@@ -26,6 +26,7 @@ export async function fetchMovieDetails(
 
   return response.data;
 }
+
 export async function fetchVideosMovie(id: string): Promise<VideoResponse> {
   const response = await api.get(`/movie/${id}/videos`);
 
