@@ -1,21 +1,14 @@
 "use client";
-import { StarFilledIcon } from "@/components/icons";
 import PaginationCustom from "@/components/pagination-movies";
 import { GenreResponse, MovieResponse, MoviesRequest } from "@/types";
 import { Button } from "@heroui/button";
-import {
-  Card,
-  CardFooter,
-  CardHeader,
-  Image,
-  Select,
-  Selection,
-  SelectItem,
-} from "@heroui/react";
-import { useRouter } from "next/navigation";
+import { Select, Selection, SelectItem } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { fetchMovies } from "../api/movies";
-import Container from "@/components/container";
+import Container from "@/components/Container/container";
+import ContainerGrid from "@/components/Container/container-grid";
+import SimpleCard from "@/components/Card/card";
+import NextLink from "next/link";
 
 interface MoviesClientProps {
   initialGenres: GenreResponse[];
@@ -31,14 +24,8 @@ export default function MovieContent({
   const [sortBy, setSortBy] = useState<string>("popularity.desc");
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const router = useRouter();
-
   const handleClear = () => {
     setSelectedGenres(new Set([]));
-  };
-
-  const handleCardClick = (movieId: number) => {
-    router.push(`/movie/${movieId}`);
   };
 
   useEffect(() => {
@@ -96,33 +83,17 @@ export default function MovieContent({
       <section className="flex flex-col gap-16 w-full">
         {movies?.results.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+            <ContainerGrid>
               {movies.results.map((movie) => (
-                <Card
+                <NextLink
+                  href={`/movie/${movie.id}`}
                   key={movie.id}
-                  isPressable
-                  onPress={() => handleCardClick(movie.id)}
+                  className="w-full h-full"
                 >
-                  <CardHeader className="absolute z-20 top-2 right-2 flex items-center gap-1.5 backdrop-blur-md bg-default-400/30 w-fit py-1 rounded-lg">
-                    <StarFilledIcon className="text-yellow-300" />
-                    <p className="text-zinc-50/95 text-sm md:text-base pointer-events-none">
-                      {movie.vote_average.toPrecision(2)}
-                    </p>
-                  </CardHeader>
-                  <Image
-                    removeWrapper
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
-                    className="z-0 w-full h-full object-cover min-h-72"
-                  />
-                  <CardFooter className="text- place-content-center">
-                    <h1 className="font-medium md:font-semibold text-sm md-text-base ">
-                      {movie.title}
-                    </h1>
-                  </CardFooter>
-                </Card>
+                  <SimpleCard movie={movie} />
+                </NextLink>
               ))}
-            </div>
+            </ContainerGrid>
             <PaginationCustom
               currentPage={currentPage}
               totalPages={movies.total_pages > 500 ? 500 : movies.total_pages}
