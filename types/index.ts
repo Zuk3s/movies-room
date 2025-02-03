@@ -12,25 +12,27 @@ export type MoviesRequest = {
 
 export type MovieResponse = {
   page: number;
-  results: Array<{
-    adult: boolean;
-    backdrop_path: string;
-    id: number;
-    title: string;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    poster_path: string;
-    media_type: string;
-    genre_ids: GenreResponse[];
-    popularity: number;
-    release_date: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-  }>;
+  results: Movie[];
   total_pages: number;
   total_results: number;
+};
+
+export type Movie = {
+  adult: boolean;
+  backdrop_path: string;
+  id: number;
+  title: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  media_type: string;
+  genre_ids: GenreResponse[];
+  popularity: number;
+  release_date: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
 };
 
 export type GenreResponse = {
@@ -87,7 +89,7 @@ export type Video = {
   iso_639_1: string;
   iso_3166_1: string;
   name: string;
-  key: string; 
+  key: string;
   site: "YouTube" | "Vimeo";
   size: 360 | 480 | 720 | 1080;
   type:
