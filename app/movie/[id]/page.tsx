@@ -3,7 +3,7 @@ import {
   fetchMovies,
   fetchVideosMovie,
 } from "@/app/api/movies";
-import Container from "@/components/container";
+import Container from "@/components/Container/container";
 import DynamicImage from "@/components/dynamic-image";
 import { StarFilledIcon } from "@/components/icons";
 import { GenresList } from "@/components/maps-details";
@@ -109,7 +109,7 @@ export default async function Page({
                   <span className="text-default-500">Classificação:</span>
                   <StarFilledIcon className="text-yellow-300" />
                   {movie.vote_average.toPrecision(2)}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </h2>
+                </h2>
                 <Divider orientation="vertical" />
                 <h2>
                   <span className="text-default-500">Votos: </span>
