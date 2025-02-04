@@ -1,14 +1,16 @@
 "use client";
+
 import PaginationCustom from "@/components/pagination-movies";
 import { GenreResponse, MovieResponse, MoviesRequest } from "@/types";
 import { Button } from "@heroui/button";
 import { Select, Selection, SelectItem } from "@heroui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { fetchMovies } from "../api/movies";
 import Container from "@/components/Container/container";
 import ContainerGrid from "@/components/Container/container-grid";
 import SimpleCard from "@/components/Card/card";
 import NextLink from "next/link";
+import { SharedSelection } from "@heroui/system";
 
 interface MoviesClientProps {
   initialGenres: GenreResponse[];
@@ -24,24 +26,32 @@ export default function MovieContent({
   const [sortBy, setSortBy] = useState<string>("popularity.desc");
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const handleClear = () => {
-    setSelectedGenres(new Set([]));
+  const handleSortChange = (keys: SharedSelection) => {
+    const newSortBy = Array.from(keys)[0] as string;
+    setSortBy(newSortBy);
+    setCurrentPage(1);
+    handleFetchMovies(newSortBy, selectedGenres, 1);
   };
 
-  useEffect(() => {
+  const handleGenreChange = (keys: SharedSelection) => {
+    setSelectedGenres(keys);
+    setCurrentPage(1);
+    handleFetchMovies(sortBy, keys, 1);
+  };
+
+  const handleFetchMovies = async (
+    updatedSortBy: string = sortBy,
+    updatedGenres: Selection = selectedGenres,
+    updatedPage: number = currentPage
+  ) => {
     const params: MoviesRequest = {
-      page: currentPage,
-      sort_by: sortBy,
-      with_genres: Array.from(selectedGenres).join(", "),
+      page: updatedPage,
+      sort_by: updatedSortBy,
+      with_genres: Array.from(updatedGenres).join(", "),
     };
-
-    async function fetchMoviesData() {
-      const movies = await fetchMovies(params);
-      setMovies(movies);
-    }
-
-    fetchMoviesData();
-  }, [selectedGenres, sortBy, currentPage]);
+    const movies = await fetchMovies(params);
+    setMovies(movies);
+  };
 
   return (
     <Container className="flex flex-col gap-16 pt-16">
@@ -50,7 +60,7 @@ export default function MovieContent({
           className="md:max-w-xs"
           label="Ordenar por"
           selectedKeys={new Set([sortBy])}
-          onSelectionChange={(keys) => setSortBy(Array.from(keys)[0] as string)}
+          onSelectionChange={handleSortChange}
           size="md"
           variant="bordered"
         >
@@ -65,7 +75,7 @@ export default function MovieContent({
           placeholder="Selecione o gênero"
           selectionMode="multiple"
           selectedKeys={new Set(selectedGenres)}
-          onSelectionChange={setSelectedGenres}
+          onSelectionChange={handleGenreChange}
           items={initialGenres}
           variant="bordered"
         >
@@ -73,7 +83,12 @@ export default function MovieContent({
         </Select>
         <Button
           size="lg"
-          onPress={handleClear}
+          onPress={() => {
+            setSelectedGenres(new Set([]));
+            setSortBy("popularity.desc");
+            setCurrentPage(1);
+            handleFetchMovies("popularity.desc", new Set([]), 1);
+          }}
           color="secondary"
           isDisabled={Array.from(selectedGenres).length === 0}
         >
@@ -97,11 +112,14 @@ export default function MovieContent({
             <PaginationCustom
               currentPage={currentPage}
               totalPages={movies.total_pages > 500 ? 500 : movies.total_pages}
-              onPageChange={setCurrentPage}
+              onPageChange={(page) => {
+                setCurrentPage(page);
+                handleFetchMovies(sortBy, selectedGenres, page);
+              }}
             />
           </>
         ) : (
-          <div>Nenhum filme encontrado.</div>
+          <div className="text-center" >Nenhum filme encontrado.</div>
         )}
       </section>
     </Container>
