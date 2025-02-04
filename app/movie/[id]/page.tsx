@@ -1,8 +1,5 @@
-import {
-  fetchMovieDetails,
-  fetchMovies,
-  fetchVideosMovie,
-} from "@/app/api/movies";
+import { fetchMovieDetails, fetchMovies } from "@/app/api/movies";
+import CarrouselContainer from "@/components/Container/carrousel-container";
 import Container from "@/components/Container/container";
 import DynamicImage from "@/components/dynamic-image";
 import { StarFilledIcon } from "@/components/icons";
@@ -14,12 +11,10 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 async function getMovie(id: string) {
-  const [movie, videos] = await Promise.all([
-    fetchMovieDetails(id),
-    fetchVideosMovie(id),
-  ]);
+  const movie = await fetchMovieDetails(id);
   if (!movie) notFound();
-  return { movie, videos };
+
+  return { movie };
 }
 
 export async function generateStaticParams() {
@@ -64,7 +59,7 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const { movie, videos } = await getMovie(id);
+  const { movie } = await getMovie(id);
 
   return (
     <section className="w-full flex flex-col gap-16">
@@ -83,7 +78,7 @@ export default async function Page({
           />
         )}
       </div>
-      <Container>
+      <Container className="flex flex-col gap-16">
         <div className="flex flex-col md:flex-row gap-10">
           {movie.poster_path && (
             <DynamicImage
@@ -129,9 +124,22 @@ export default async function Page({
               </h2>
               <p className="sm:text-lg text-default-500">{movie.overview}</p>
             </div>
+            {movie.tagline && (
+              <i className="text-lg text-center">"{movie.tagline}"</i>
+            )}
           </div>
         </div>
-        {videos.results.length > 0 && <MovieTrailer videos={videos} />}
+
+        {movie.videos.results.length > 0 && (
+          <MovieTrailer videos={movie.videos.results} />
+        )}
+
+        <CarrouselContainer
+          title="Recomendados"
+          list={movie.recommendations.results}
+        />
+
+        <CarrouselContainer title="Similares" list={movie.similar.results} />
       </Container>
     </section>
   );
