@@ -8,15 +8,11 @@ async function getData() {
     fetchGenres(),
   ]);
 
-  return {
-    props: { initialGenres, initialMovies },
-  };
+  return { initialGenres, initialMovies };
 }
 
 export default async function MoviesPage() {
-  const {
-    props: { initialGenres, initialMovies },
-  } = await getData();
+  const { initialGenres, initialMovies } = await getData();
 
   return (
     <MovieContent initialMovies={initialMovies} initialGenres={initialGenres} />
