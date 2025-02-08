@@ -1,16 +1,16 @@
 "use client";
 
-import PaginationCustom from "@/components/pagination-movies";
 import { GenreResponse, MovieResponse, MoviesRequest } from "@/types";
 import { Button } from "@heroui/button";
 import { Select, Selection, SelectItem } from "@heroui/react";
 import { useState } from "react";
 import { fetchMovies } from "../api/movies";
-import Container from "@/components/Container/container";
-import ContainerGrid from "@/components/Container/container-grid";
-import SimpleCard from "@/components/Card/card";
+import ContainerGrid from "@/components/ui/container/ContainerGrid";
 import NextLink from "next/link";
 import { SharedSelection } from "@heroui/system";
+import Container from "@/components/ui/container/Container";
+import SimpleCard from "@/components/ui/card/Card";
+import PaginationCustom from "@/components/ui/pagination/PaginationCustom";
 
 interface MoviesClientProps {
   initialGenres: GenreResponse[];
@@ -119,7 +119,7 @@ export default function MovieContent({
             />
           </>
         ) : (
-          <div className="text-center" >Nenhum filme encontrado.</div>
+          <div className="text-center">Nenhum filme encontrado.</div>
         )}
       </section>
     </Container>
