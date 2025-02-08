@@ -1,14 +1,13 @@
 import { fetchMovieDetails, fetchMovies } from "@/app/api/movies";
-import CarrouselContainer from "@/components/Container/carrousel-container";
-import Container from "@/components/Container/container";
-import DynamicImage from "@/components/dynamic-image";
-import { StarFilledIcon } from "@/components/icons";
-import { GenresList } from "@/components/maps-details";
-import MovieTrailer from "@/components/movie-trailer";
+import CarrouselContainer from "@/components/ui/container/CarrouselContainer";
+import Container from "@/components/ui/container/Container";
+import { GenresList } from "@/components/ui/details/genres/GenresList";
+import MovieTrailer from "@/components/ui/trailer/Trailer";
+import { formatDate, formatRuntime } from "@/libs/utils";
 import { MovieResponse } from "@/types";
-import { Divider } from "@heroui/react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import Overview from "@/components/ui/details/overview/Overview";
 
 async function getMovie(id: string) {
   const movie = await fetchMovieDetails(id);
@@ -35,22 +34,13 @@ export async function generateMetadata({
 
   return {
     title: movie.title,
+    description: movie.overview,
+    openGraph: {
+      title: movie.title,
+      description: movie.overview,
+      image: `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`,
+    },
   };
-}
-
-async function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat("pt-BR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  }).format(date);
-}
-
-async function formatRuntime(minutes: number) {
-  const hours = Math.floor(minutes / 60);
-  const remainingMinutes = minutes % 60;
-  return `${hours}h ${remainingMinutes}m`;
 }
 
 export default async function Page({
@@ -60,6 +50,9 @@ export default async function Page({
 }) {
   const { id } = await params;
   const { movie } = await getMovie(id);
+
+  const duration = await formatRuntime(movie.runtime);
+  const date = await formatDate(movie.release_date);
 
   return (
     <section className="w-full flex flex-col gap-16">
@@ -78,45 +71,30 @@ export default async function Page({
           />
         )}
       </div>
-      <Container className="flex flex-col gap-16">
+      <Container className="flex flex-col gap-16 w-full">
         <div className="flex flex-col md:flex-row gap-10">
           {movie.poster_path && (
-            <DynamicImage
-              className="mx-auto flex justify-center w-full md:w-1/3"
-              imagePath={movie.poster_path}
-              alt={movie.title}
-            />
+            <div className="mx-auto flex justify-center w-full md:w-1/3">
+              <Image
+                src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`}
+                width={300}
+                height={450}
+                alt={movie.title}
+                loading="lazy"
+                className="object-cover rounded-3xl shadow-lg h-auto w-auto"
+              />
+            </div>
           )}
 
           <div className="flex flex-col gap-10 md:w-2/3">
             <GenresList genres={movie.genres} />
 
-            <div className="flex flex-col gap-3 sm:text-lg ">
-              <h2>
-                <span className="text-default-500">Lançamento: </span>
-                {movie.release_date
-                  ? formatDate(movie.release_date)
-                  : "desconhecida"}
-              </h2>
-
-              <div className="flex gap-4">
-                <h2 className="flex items-center gap-1">
-                  <span className="text-default-500">Classificação:</span>
-                  <StarFilledIcon className="text-yellow-300" />
-                  {movie.vote_average.toPrecision(2)}
-                </h2>
-                <Divider orientation="vertical" />
-                <h2>
-                  <span className="text-default-500">Votos: </span>
-                  {movie.vote_count}
-                </h2>
-              </div>
-
-              <h2>
-                <span className="text-default-500">Duração: </span>
-                {formatRuntime(movie.runtime)}
-              </h2>
-            </div>
+            <Overview
+              date={date}
+              duration={duration}
+              voteAverage={movie.vote_average}
+              voteCount={movie.vote_count}
+            />
 
             <div>
               <h2 className="text-xl sm:text-2xl mb-4 text-default-800">
@@ -124,6 +102,7 @@ export default async function Page({
               </h2>
               <p className="sm:text-lg text-default-500">{movie.overview}</p>
             </div>
+
             {movie.tagline && (
               <i className="text-lg text-center">"{movie.tagline}"</i>
             )}
@@ -134,12 +113,16 @@ export default async function Page({
           <MovieTrailer videos={movie.videos.results} />
         )}
 
-        <CarrouselContainer
-          title="Recomendados"
-          list={movie.recommendations.results}
-        />
+        {movie.recommendations.results.length > 0 && (
+          <CarrouselContainer
+            title="Recomendados"
+            list={movie.recommendations.results}
+          />
+        )}
 
-        <CarrouselContainer title="Similares" list={movie.similar.results} />
+        {movie.similar.results.length > 0 && (
+          <CarrouselContainer title="Similares" list={movie.similar.results} />
+        )}
       </Container>
     </section>
   );
