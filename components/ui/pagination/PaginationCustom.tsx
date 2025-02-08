@@ -1,0 +1,42 @@
+"use client";
+
+import { Button, Pagination } from "@heroui/react";
+
+export default function PaginationCustom({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) {
+  return (
+    <div className="flex flex-row gap-5 w-full justify-center">
+      <Button
+        color="secondary"
+        size="sm"
+        variant="flat"
+        onPress={() => onPageChange(Math.max(1, currentPage - 1))}
+        isDisabled={currentPage === 1}
+      >
+        Voltar
+      </Button>
+      <Pagination
+        color="secondary"
+        page={currentPage}
+        total={totalPages}
+        onChange={onPageChange}
+      />
+      <Button
+        color="secondary"
+        size="sm"
+        variant="flat"
+        onPress={() => onPageChange(Math.min(totalPages, currentPage + 1))}
+        isDisabled={currentPage === totalPages}
+      >
+        Próximo
+      </Button>
+    </div>
+  );
+}
