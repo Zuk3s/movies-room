@@ -43,7 +43,12 @@ export type GenreResponse = {
 export type MovieDetailsResponse = {
   adult: boolean;
   backdrop_path: string;
-  belongs_to_collection: string | null;
+  belongs_to_collection: {
+    id: number;
+    name: string;
+    poster_path: string;
+    backdrop_path: string;
+  } | null;
   budget: number;
   genres: GenreResponse[];
   homepage: string;
@@ -54,35 +59,47 @@ export type MovieDetailsResponse = {
   overview: string;
   popularity: number;
   poster_path: string;
-  production_companies: Array<{
+  production_companies: {
     id: number;
     logo_path: string | null;
     name: string;
     origin_country: string;
-  }>;
-  production_countries: Array<{
+  }[];
+  production_countries: {
     iso_3166_1: string;
     name: string;
-  }>;
+  }[];
   release_date: string;
   revenue: number;
   runtime: number;
-  spoken_languages: Array<{
+  spoken_languages: {
     english_name: string;
     iso_639_1: string;
     name: string;
-  }>;
+  }[];
   status: string;
   tagline: string;
   title: string;
   video: boolean;
   vote_average: number;
   vote_count: number;
-};
-
-export type VideoResponse = {
-  id: number;
-  results: Video[];
+  similar: MovieResponse;
+  recommendations: MovieResponse;
+  videos: {
+    results: Video[];
+  };
+  release_dates: {
+    results: {
+      iso_3166_1: string;
+      release_dates: {
+        certification: string;
+        iso_639_1: string;
+        note: string;
+        release_date: string;
+        type: number;
+      }[];
+    }[];
+  };
 };
 
 export type Video = {
