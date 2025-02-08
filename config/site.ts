@@ -1,21 +1,32 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Network Nightmare",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "Movies Room",
+  description: "Descobra sobre filmes no Movies Room",
+  keywords: [
+    "movies",
+    "room",
+    "movie",
+    "film",
+    "cinema",
+    "filmes",
+    "series",
+    "assistir",
+    "watch",
+  ],
   navItems: [
     {
-      label: "Home",
+      label: "Início",
       href: "/",
     },
     {
-      label: "Movie",
+      label: "Filmes",
       href: "/movie",
     },
   ],
   links: {
     github: "https://github.com/Zuk3s/movies-room",
     discord: "https://discord.gg/9b6yyZKmH4",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/felipe-dev/",
   },
 };
