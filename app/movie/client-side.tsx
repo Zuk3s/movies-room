@@ -5,12 +5,12 @@ import { Button } from "@heroui/button";
 import { Select, Selection, SelectItem } from "@heroui/react";
 import { useState } from "react";
 import { fetchMovies } from "../api/movies";
-import ContainerGrid from "@/components/ui/container/ContainerGrid";
+import ContainerGrid from "@/components/ui/Container/ContainerGrid";
 import NextLink from "next/link";
 import { SharedSelection } from "@heroui/system";
-import Container from "@/components/ui/container/Container";
-import SimpleCard from "@/components/ui/card/Card";
-import PaginationCustom from "@/components/ui/pagination/PaginationCustom";
+import Container from "@/components/ui/Container/Container";
+import SimpleCard from "@/components/ui/Card/Card";
+import PaginationCustom from "@/components/ui/Pagination/PaginationCustom";
 
 interface MoviesClientProps {
   initialGenres: GenreResponse[];
@@ -60,8 +60,7 @@ export default function MovieContent({
           className="md:max-w-xs"
           label="Ordenar por"
           selectedKeys={new Set([sortBy])}
-          onSelectionChange={handleSortChange}
-          size="md"
+          onSelectionChange={() => handleSortChange}
           variant="bordered"
         >
           <SelectItem key="popularity.desc">Mais populares</SelectItem>
@@ -75,7 +74,7 @@ export default function MovieContent({
           placeholder="Selecione o gênero"
           selectionMode="multiple"
           selectedKeys={new Set(selectedGenres)}
-          onSelectionChange={handleGenreChange}
+          onSelectionChange={() => handleGenreChange}
           items={initialGenres}
           variant="bordered"
         >
