@@ -11,7 +11,7 @@ export function GenresList({ genres }: { genres: GenreResponse[] }) {
           key={genre.id}
           variant="flat"
           color="secondary"
-          className=" py-4 text-sm sm:text-base md:px-4 md:py-5 md:text-lg"
+          className=" py-4 text-sm sm:text-base md:px-4 md:py-5"
         >
           {genre.name}
         </Chip>
