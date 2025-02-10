@@ -15,7 +15,6 @@ export default function Trailer({ videos }: { videos: Video[] }) {
       <h1 className="text-2xl">Veja ao trailer</h1>
       <Select
         className="max-w-xs"
-        size="lg"
         labelPlacement="inside"
         label="Escolha um video"
         selectedKeys={selectedVideo}
@@ -24,7 +23,7 @@ export default function Trailer({ videos }: { videos: Video[] }) {
         isRequired
       >
         {videos.map((video) => (
-          <SelectItem className="text-xl" key={video.key}>
+          <SelectItem className="text-lg text-default-700 space-y-4" key={video.key}>
             {video.name}
           </SelectItem>
         ))}
