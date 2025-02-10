@@ -14,7 +14,7 @@ export default function Overview({
   voteCount,
 }: OverviewProps) {
   return (
-    <div className="space-y-4 sm:text-lg">
+    <div className="space-y-3">
       {date && <OverviewItem title="Lançamento">{date}</OverviewItem>}
       {duration && <OverviewItem title="Duração">{duration}</OverviewItem>}
       {voteAverage && (
