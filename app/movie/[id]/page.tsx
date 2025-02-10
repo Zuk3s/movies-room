@@ -1,9 +1,9 @@
 import { fetchMovieDetails, fetchMovies } from "@/app/api/movies";
-import CarrouselContainer from "@/components/ui/container/CarrouselContainer";
-import Container from "@/components/ui/container/Container";
+import CarrouselContainer from "@/components/ui/Container/CarrouselContainer";
+import Container from "@/components/ui/Container/Container";
 import { GenresList } from "@/components/ui/details/genres/GenresList";
-import MovieTrailer from "@/components/ui/trailer/Trailer";
-import { formatDate, formatRuntime } from "@/libs/utils";
+import MovieTrailer from "@/components/ui/Trailer/Trailer";
+import { formatDate, formatRuntime } from "@/libs/utils/utils";
 import { MovieResponse } from "@/types";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -74,7 +74,7 @@ export default async function Page({
       <Container className="flex flex-col gap-16 w-full">
         <div className="flex flex-col md:flex-row gap-10">
           {movie.poster_path && (
-            <div className="mx-auto flex justify-center w-full md:w-1/3">
+            <div className="mx-auto flex justify-center w-full min-w-80 sm:w-1/3 md:w-1/4">
               <Image
                 src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`}
                 width={300}
@@ -86,7 +86,7 @@ export default async function Page({
             </div>
           )}
 
-          <div className="flex flex-col gap-10 md:w-2/3">
+          <div className="flex flex-col gap-8 md:w-2/3">
             <GenresList genres={movie.genres} />
 
             <Overview
@@ -97,7 +97,7 @@ export default async function Page({
             />
 
             <div>
-              <h2 className="text-xl sm:text-2xl mb-4 text-default-800">
+              <h2 className="text-xl sm:text-xl mb-4 text-default-800">
                 Sobre o filme:
               </h2>
               <p className="sm:text-lg text-default-500">{movie.overview}</p>
