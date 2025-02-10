@@ -1,10 +1,6 @@
 "use server";
 
-import {
-  MovieDetailsResponse,
-  MovieResponse,
-  MoviesRequest,
-} from "@/types";
+import { MovieDetailsResponse, MovieResponse, MoviesRequest } from "@/types";
 import api from ".";
 
 export async function fetchMovies({
@@ -18,13 +14,19 @@ export async function fetchMovies({
   return response.data;
 }
 
-{
-  /*
-  - Adicionar o APPEND_TO_RESPOSNE, com as propriedades, "similar,recomendations,videos,release_date", ele precisa ser passado como query params
-  - Após isso, apague o fetchVideoMovie, pois ele não será mais necessário. 
-  - Também mude o Type Response dessa requisição.
-*/
+export async function fetchMovieQuery({
+  query,
+}: {
+  query: string;
+}): Promise<MovieResponse> {
+  const response = await api.get(`/search/movie`, {
+    params: {
+      query,
+    },
+  });
+  return response.data;
 }
+
 export async function fetchMovieDetails(
   id: string
 ): Promise<MovieDetailsResponse> {
@@ -37,7 +39,7 @@ export async function fetchMovieDetails(
   return response.data;
 }
 
-export async function fetchTrendingMoviesData(
+export async function fetchTrendingMovies(
   time_window: "day" | "week" = "week"
 ) {
   const response = await api.get(`/trending/movie/${time_window}`);
