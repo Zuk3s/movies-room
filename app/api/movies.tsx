@@ -1,47 +1,76 @@
 "use server";
 
-import { MovieDetailsResponse, MovieResponse, MoviesRequest } from "@/types";
-import api from ".";
+import {
+  Movie,
+  MovieDetailsResponse,
+  MovieResponse,
+  MoviesRequest,
+} from "@/types";
 
-export async function fetchMovies({
-  ...params
-}: MoviesRequest): Promise<MovieResponse> {
-  const response = await api.get(`/discover/movie`, {
-    params: {
-      ...params,
+const BASE_URL = "https://api.themoviedb.org/3";
+const DEFAULT_PARAMS = {
+  language: "pt-BR",
+};
+
+async function fetchFromApi(
+  endpoint: string,
+  params: Record<string, any> = {}
+): Promise<any> {
+  const url = new URL(`${BASE_URL}${endpoint}`);
+  Object.entries({ ...DEFAULT_PARAMS, ...params }).forEach(([key, value]) =>
+    url.searchParams.append(key, value)
+  );
+
+  const response = await fetch(url.toString(), {
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN_TMDB}`,
     },
   });
-  return response.data;
+
+  if (!response.ok) {
+    throw new Error(
+      `Error fetching data: ${response.status} ${response.statusText}`
+    );
+  }
+
+  return response.json();
 }
 
-export async function fetchMovieQuery({
-  query,
-}: {
-  query: string;
-}): Promise<MovieResponse> {
-  const response = await api.get(`/search/movie`, {
-    params: {
-      query,
-    },
-  });
-  return response.data;
+export async function fetchMovies(
+  params: MoviesRequest
+): Promise<MovieResponse> {
+  return fetchFromApi(`/discover/movie`, params);
+}
+
+export async function fetchMovieQuery(query: string): Promise<MovieResponse> {
+  return fetchFromApi(`/search/movie`, { query });
 }
 
 export async function fetchMovieDetails(
   id: string
 ): Promise<MovieDetailsResponse> {
-  const response = await api.get(`/movie/${id}`, {
-    params: {
-      append_to_response: "similar,recommendations,videos,release_dates",
-    },
+  return fetchFromApi(`/movie/${id}`, {
+    append_to_response: "similar,recommendations,videos,release_dates",
   });
-
-  return response.data;
 }
 
 export async function fetchTrendingMovies(
   time_window: "day" | "week" = "week"
-) {
-  const response = await api.get(`/trending/movie/${time_window}`);
-  return response.data;
+): Promise<MovieResponse> {
+  return fetchFromApi(`/trending/movie/${time_window}`);
+}
+
+export async function fetchUpComingMovies(): Promise<Movie[]> {
+  const data = await fetchFromApi("/movie/upcoming");
+  return data.results;
+}
+
+export async function fetchPopularMovies(): Promise<Movie[]> {
+  const data = await fetchFromApi("/movie/popular");
+  return data.results;
+}
+
+export async function fetchNowPlayingMovies(): Promise<Movie[]> {
+  const data = await fetchFromApi("/movie/now_playing");
+  return data.results;
 }
