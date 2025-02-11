@@ -10,7 +10,6 @@ export default function CarrouselContainer({
   list: Movie[];
   title: string;
 }) {
-  const {} = list;
   return (
     <Container hasMaxWidth={false}>
       <h2 className="text-2xl font-bold">{title}</h2>
