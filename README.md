@@ -5,7 +5,10 @@
 -->
 
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+![MIT License](https://img.shields.io/badge/License-MIT-brightgreen)
+![Status](https://img.shields.io/badge/Status-In%20Development-orange)
+![GitHub watchers](https://img.shields.io/github/watchers/Zuk3s/movies-room?color=blue)
+
 
 # Movies Room
 
