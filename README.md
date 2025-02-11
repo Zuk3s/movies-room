@@ -1,54 +1,106 @@
-# Next.js & HeroUI Template
+<!--
+## 📸 Screenshot
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+-->
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
 
-## Technologies Used
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [HeroUI v2](https://heroui.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
-- [Axios]
+# Movies Room
 
-## How to Use
+Movies Room is a modern web application built with Next.js that allows users to discover and explore movies. The app integrates with The Movie Database (TMDB) API to provide detailed information about movies, genres, recommendations, trailers, and ratings. With an intuitive and responsive design, this app offers an engaging experience for movie enthusiasts.
 
-### Use the template with create-next-app
+<!-- 
+## 🎥 Demonstration
 
-To create a new project based on this template using `create-next-app`, run the following command:
+Insira um gif ou um link de alguma demonstração
+-->
+
+## 🛤️ Roadmap  
+
+✅ Implemented:  
+- ✅ Dark Mode Support  
+- ✅ Implemented movie search by title  
+- ✅ Implemented movie discorver page
+- ✅ Created a movie details page  
+
+🚀 Upcoming Improvements:  
+- ⬜ Add a dynamic homepage with highlights and trending movies  
+- ⬜ Improve performance with image optimization  
+- ⬜ Implement a user authentication system  
+- ⬜ Create an offline mode to view saved movies  
+- ⬜ Enhance HeroUI component customization  
+- ⬜ Implement a favorites system to save movies  
+- ⬜ Create a user reviews and rating section  
+- ⬜ Create about Page
+
+## 🛠️ Tech Stack
+
+- Next.js 15
+- React 19
+- TypeScript
+- TailwindCSS
+- HeroUI
+- Framer Motion
+- Next Themes
+
+## 📚 Key Learnings
+
+During the development of Movies Room, I gained valuable experience with:
+
+- SSR (Server-Side Rendering) and SSG (Static Site Generation) for optimized performance and SEO.
+- Fetching data from APIs using fetch and processing responses in JSON format.
+- Componentization to build a scalable and maintainable codebase, focusing on reusable components and Custom Hooks.
+- Handling dynamic and static pages in Next.js, understanding when to use SSR and when to leverage SSG.
+
+## ⚙️ Setup & Installation
+Clone this repository:
 
 ```bash
-npx create-next-app -e https://github.com/heroui-inc/next-app-template
+git clone https://github.com/Zuk3s/movies-room.git
 ```
 
-### Install dependencies
+Navigate to the project directory:
+```bash
+cd movies-room
+```
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
+Install dependencies:
 ```bash
 npm install
 ```
 
-### Run the development server
-
+Run the development server:
 ```bash
 npm run dev
 ```
+    
+## 🌍 Environment Setup
 
-### Setup pnpm (optional)
+Create a .env.local file at the root of the project and add your TMDB API token:
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+`NEXT_PUBLIC_API_TOKEN_TMDB`
 
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
+## 💬 Feedback  
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+If you have any suggestions, found a bug, or want to contribute, feel free to open an issue on the [GitHub repository](https://github.com/Zuk3s/movies-room/issues).  
 
-## License
+You can also reach out via:  
+📧 Email: your-email@example.com
 
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
+Your feedback helps improve **Movies Room**! 🚀  
+
+<!-- 
+## 📖 Reference
+-->
+
+## 📜 License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+## ✍️ Author
+
+- [@Zuk3s](https://www.github.com/Zuk3s)
+
