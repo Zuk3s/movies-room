@@ -42,7 +42,7 @@ export function SearchModal() {
           <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
         }
         endContent={
-          <Kbd className="hidden lg:inline-block" keys={["ctrl"]}>
+          <Kbd className="hidden lg:inline-block" keys={["command"]}>
             Ctrl + K
           </Kbd>
         }
