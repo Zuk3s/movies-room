@@ -87,7 +87,7 @@ Create a .env.local file at the root of the project and add your TMDB API token:
 If you have any suggestions, found a bug, or want to contribute, feel free to open an issue on the [GitHub repository](https://github.com/Zuk3s/movies-room/issues).  
 
 You can also reach out via:  
-📧 Email: your-email@example.com
+📧 Email: felipe.macedo0829@gmail.com
 
 Your feedback helps improve **Movies Room**! 🚀  
 
