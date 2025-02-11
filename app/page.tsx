@@ -1,7 +1,23 @@
-export default function Home() {
+import CarrouselContainer from "@/components/ui/Container/CarrouselContainer";
+import Container from "@/components/ui/Container/Container";
+import {
+  fetchUpComingMovies,
+  fetchPopularMovies,
+  fetchNowPlayingMovies,
+} from "./api/movies";
+
+export default async function Home() {
+  const [upComing, popular, nowPlaying] = await Promise.all([
+    fetchUpComingMovies(),
+    fetchPopularMovies(),
+    fetchNowPlayingMovies(),
+  ]);
+
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      Tela inicial
-    </section>
+    <Container className="py-6 space-y-16">
+      <CarrouselContainer title="Populares" list={popular} />
+      <CarrouselContainer title="Nos Cinemas" list={nowPlaying} />
+      <CarrouselContainer title="Em Breve" list={upComing} />
+    </Container>
   );
 }
