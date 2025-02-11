@@ -60,7 +60,7 @@ export default function MovieContent({
           className="md:max-w-xs"
           label="Ordenar por"
           selectedKeys={new Set([sortBy])}
-          onSelectionChange={() => handleSortChange}
+          onSelectionChange={handleSortChange}
           variant="bordered"
         >
           <SelectItem key="popularity.desc">Mais populares</SelectItem>
@@ -74,7 +74,7 @@ export default function MovieContent({
           placeholder="Selecione o gênero"
           selectionMode="multiple"
           selectedKeys={new Set(selectedGenres)}
-          onSelectionChange={() => handleGenreChange}
+          onSelectionChange={handleGenreChange}
           items={initialGenres}
           variant="bordered"
         >
