@@ -4,6 +4,11 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
+export type GenreResponse = {
+  id: number;
+  name: string;
+};
+
 export type MoviesRequest = {
   page?: number;
   sort_by?: string;
@@ -35,10 +40,6 @@ export type Movie = {
   vote_count: number;
 };
 
-export type GenreResponse = {
-  id: number;
-  name: string;
-};
 
 export type MovieDetailsResponse = {
   adult: boolean;
