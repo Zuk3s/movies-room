@@ -29,14 +29,15 @@ Insira um gif ou um link de alguma demonstração
 - ✅ Created a movie details page  
 
 🚀 Upcoming Improvements:  
-- ⬜ Add a dynamic homepage with highlights and trending movies  
 - ⬜ Improve performance with image optimization  
+- ⬜ Add a dynamic homepage with highlights and trending movies  
+- ⬜ Enhance HeroUI component customization  
 - ⬜ Implement a user authentication system  
 - ⬜ Create an offline mode to view saved movies  
-- ⬜ Enhance HeroUI component customization  
 - ⬜ Implement a favorites system to save movies  
 - ⬜ Create a user reviews and rating section  
-- ⬜ Create about Page
+- ⬜ Create about page
+- ⬜ Implement animations on the component card
 
 ## 🛠️ Tech Stack
 
