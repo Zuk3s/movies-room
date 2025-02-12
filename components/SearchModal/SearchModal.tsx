@@ -59,10 +59,9 @@ export function SearchModal() {
           closeButton: "hidden",
           base: ["bg-background", "outline outline-1 outline-white/20"],
         }}
-        className="max-h-[60vh]"
+        className="max-h-[80vh] sm:max-h-[60vh] overflow-hidden"
         placement="center"
         isOpen={isOpen}
-        scrollBehavior="inside"
         size="xl"
         onOpenChange={onOpenChange}
       >
@@ -89,7 +88,7 @@ export function SearchModal() {
             />
           </ModalHeader>
           <Divider />
-          <ModalBody>
+          <ModalBody className="overflow-y-auto">
             <Listbox variant="flat" itemClasses={{ title: ["text-base"] }}>
               {movies && (
                 <ListboxSection
