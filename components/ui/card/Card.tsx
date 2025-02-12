@@ -1,5 +1,7 @@
 import { CardFooter, CardHeader, Image, Card } from "@heroui/react";
+
 import { StarFilledIcon } from "../../icons";
+
 import { Movie } from "@/types";
 
 interface SimpleCardProps {
@@ -17,9 +19,9 @@ export default function SimpleCard({ movie }: SimpleCardProps) {
       </CardHeader>
       <Image
         removeWrapper
-        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
         className="z-0 w-full h-full object-cover min-h-80"
+        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
       />
       <CardFooter className="text- place-content-center">
         <h1 className="font-medium md:font-semibold text-sm md-text-base ">
