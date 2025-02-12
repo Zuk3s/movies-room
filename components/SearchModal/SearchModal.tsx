@@ -59,7 +59,6 @@ export function SearchModal() {
           closeButton: "hidden",
           base: ["bg-background", "outline outline-1 outline-white/20"],
         }}
-        className="overflow-hidden"
         placement="center"
         isOpen={isOpen}
         size="xl"
