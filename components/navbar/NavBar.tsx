@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -14,16 +16,20 @@ import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  GithubIcon,
-  Logo,
-  LinkedinIcon,
-} from "@/components/icons";
+import { GithubIcon, Logo, LinkedinIcon } from "@/components/icons";
 import { SearchModal } from "@/components/SearchModal/SearchModal";
+import { useState } from "react";
 
 export const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
+    <HeroUINavbar
+      maxWidth="xl"
+      position="sticky"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -37,7 +43,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium",
+                  "data-[active=true]:text-primary data-[active=true]:font-medium"
                 )}
                 color="foreground"
                 href={item.href}
@@ -67,7 +73,7 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem className="hidden sm:flex">
-          <SearchModal />
+          <SearchModal onMenuOpenChange={() => setIsMenuOpen(!isMenuOpen)} />
         </NavbarItem>
       </NavbarContent>
 
@@ -80,11 +86,16 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarMenu>
-        <SearchModal />
+        <SearchModal onMenuOpenChange={() => setIsMenuOpen(!isMenuOpen)} />
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link color={"foreground"} href={item.href} size="lg">
+              <Link
+                color={"foreground"}
+                href={item.href}
+                size="lg"
+                onPress={() => setIsMenuOpen(!isMenuOpen)}
+              >
                 {item.label}
               </Link>
             </NavbarMenuItem>

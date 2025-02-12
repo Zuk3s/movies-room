@@ -17,7 +17,11 @@ import { Listbox, ListboxItem, ListboxSection } from "@heroui/listbox";
 import { SearchIcon } from "@/components/icons";
 import { useSearchMovies } from "@/libs/hooks/useSearchModal";
 
-export function SearchModal() {
+export function SearchModal({
+  onMenuOpenChange,
+}: {
+  onMenuOpenChange: () => void;
+}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [searchQuery, setSearchQuery] = useState("");
   const { movies, error } = useSearchMovies(searchQuery);
@@ -98,7 +102,10 @@ export function SearchModal() {
                     <ListboxItem
                       key={movie.id}
                       href={`/movie/${movie.id}`}
-                      onPress={onOpenChange}
+                      onPress={() => {
+                        onOpenChange();
+                        onMenuOpenChange();
+                      }}
                     >
                       {movie.title}
                     </ListboxItem>
