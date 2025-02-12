@@ -59,7 +59,8 @@ export function SearchModal() {
           closeButton: "hidden",
           base: ["bg-background", "outline outline-1 outline-white/20"],
         }}
-        className="max-h-[60vh] text-"
+        className="max-h-[60vh]"
+        placement="center"
         isOpen={isOpen}
         scrollBehavior="inside"
         size="xl"
@@ -96,7 +97,11 @@ export function SearchModal() {
                   classNames={{ heading: ["text-sm"] }}
                 >
                   {movies.map((movie) => (
-                    <ListboxItem key={movie.id} href={`/movie/${movie.id}`}>
+                    <ListboxItem
+                      key={movie.id}
+                      href={`/movie/${movie.id}`}
+                      onPress={onOpenChange}
+                    >
                       {movie.title}
                     </ListboxItem>
                   ))}
