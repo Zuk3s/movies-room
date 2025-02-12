@@ -59,9 +59,10 @@ export function SearchModal() {
           closeButton: "hidden",
           base: ["bg-background", "outline outline-1 outline-white/20"],
         }}
+        className="max-h-[60vh] text-"
         isOpen={isOpen}
         scrollBehavior="inside"
-        size="2xl"
+        size="xl"
         onOpenChange={onOpenChange}
       >
         <ModalContent>
@@ -88,10 +89,11 @@ export function SearchModal() {
           </ModalHeader>
           <Divider />
           <ModalBody>
-            <Listbox color="secondary" variant="bordered">
+            <Listbox variant="flat" itemClasses={{ title: ["text-base"] }}>
               {movies && (
                 <ListboxSection
                   title={searchQuery ? "Resultados" : "Tendências"}
+                  classNames={{ heading: ["text-sm"] }}
                 >
                   {movies.map((movie) => (
                     <ListboxItem key={movie.id} href={`/movie/${movie.id}`}>
