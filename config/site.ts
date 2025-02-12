@@ -26,7 +26,6 @@ export const siteConfig = {
   ],
   links: {
     github: "https://github.com/Zuk3s/movies-room",
-    discord: "https://discord.gg/9b6yyZKmH4",
     linkedin: "https://www.linkedin.com/in/felipe-dev/",
   },
 };
