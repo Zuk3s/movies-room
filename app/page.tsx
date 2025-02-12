@@ -4,8 +4,8 @@ import {
   fetchNowPlayingMovies,
 } from "./api/movies";
 
-import CarrouselContainer from "@/components/ui/Container/CarrouselContainer";
-import Container from "@/components/ui/Container/Container";
+import CarrouselContainer from "@/components/container/CarrouselContainer";
+import Container from "@/components/container/Container";
 
 export default async function Home() {
   const [upComing, popular, nowPlaying] = await Promise.all([

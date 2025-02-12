@@ -2,13 +2,13 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { fetchMovieDetails, fetchMovies } from "@/app/api/movies";
-import CarrouselContainer from "@/components/ui/Container/CarrouselContainer";
-import Container from "@/components/ui/Container/Container";
-import { GenresList } from "@/components/ui/details/genres/GenresList";
-import MovieTrailer from "@/components/ui/Trailer/Trailer";
+import CarrouselContainer from "@/components/container/CarrouselContainer";
+import Container from "@/components/container/Container";
+import { GenresList } from "@/components/details/genres/GenresList";
+import MovieTrailer from "@/components/trailer/Trailer";
 import { formatDate, formatRuntime } from "@/libs/utils/utils";
 import { MovieResponse } from "@/types";
-import Overview from "@/components/ui/details/overview/Overview";
+import Overview from "@/components/details/overview/Overview";
 
 async function getMovie(id: string) {
   const movie = await fetchMovieDetails(id);

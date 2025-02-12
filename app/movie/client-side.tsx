@@ -9,10 +9,10 @@ import NextLink from "next/link";
 import { fetchMovies } from "../api/movies";
 
 import { GenreResponse, MovieResponse, MoviesRequest } from "@/types";
-import PaginationCustom from "../../components/ui/Pagination/PaginationCustom";
-import ContainerGrid from "../../components/ui/Container/ContainerGrid";
-import Container from "../../components/ui/Container/Container";
-import { SimpleCard } from "../../components/ui/Card";
+import Container from "@/components/container/Container";
+import ContainerGrid from "@/components/container/ContainerGrid";
+import PaginationCustom from "@/components/pagination/PaginationCustom";
+import { SimpleCard } from "@/components/card";
 
 interface MoviesClientProps {
   initialGenres: GenreResponse[];

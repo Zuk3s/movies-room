@@ -1,6 +1,6 @@
 import { CardFooter, CardHeader, Image, Card } from "@heroui/react";
 
-import { StarFilledIcon } from "../../icons";
+import { StarFilledIcon } from "../icons";
 
 import { Movie } from "@/types";
 

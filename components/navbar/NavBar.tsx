@@ -20,7 +20,7 @@ import {
   Logo,
   LinkedinIcon,
 } from "@/components/icons";
-import { SearchModal } from "@/components/ui/SearchModal/SearchModal";
+import { SearchModal } from "@/components/SearchModal/SearchModal";
 
 export const Navbar = () => {
   return (
