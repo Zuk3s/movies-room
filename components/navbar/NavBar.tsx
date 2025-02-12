@@ -16,7 +16,6 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import {
   GithubIcon,
-  DiscordIcon,
   Logo,
   LinkedinIcon,
 } from "@/components/icons";
