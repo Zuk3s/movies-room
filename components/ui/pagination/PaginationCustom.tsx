@@ -15,10 +15,10 @@ export default function PaginationCustom({
     <div className="flex flex-row gap-5 w-full justify-center">
       <Button
         color="secondary"
+        isDisabled={currentPage === 1}
         size="sm"
         variant="flat"
         onPress={() => onPageChange(Math.max(1, currentPage - 1))}
-        isDisabled={currentPage === 1}
       >
         Voltar
       </Button>
@@ -30,10 +30,10 @@ export default function PaginationCustom({
       />
       <Button
         color="secondary"
+        isDisabled={currentPage === totalPages}
         size="sm"
         variant="flat"
         onPress={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-        isDisabled={currentPage === totalPages}
       >
         Próximo
       </Button>

@@ -11,10 +11,11 @@ import {
   Input,
   Divider,
 } from "@heroui/react";
-import { SearchIcon } from "@/components/icons";
 import { Kbd } from "@heroui/kbd";
-import { useSearchMovies } from "@/libs/hooks/useSearchModal";
 import { Listbox, ListboxItem, ListboxSection } from "@heroui/listbox";
+
+import { SearchIcon } from "@/components/icons";
+import { useSearchMovies } from "@/libs/hooks/useSearchModal";
 
 export function SearchModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -30,44 +31,42 @@ export function SearchModal() {
     };
 
     document.addEventListener("keydown", handleKeyDown);
+
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onOpen]);
 
   return (
     <>
       <Button
-        onPress={onOpen}
         aria-label="Search"
-        startContent={
-          <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-        }
+        className="bg-default-700/10 hover:bg-default-800/10 text-default-900/60 hover:text-default-900/50"
         endContent={
-          <Kbd className="hidden lg:inline-block" keys={["command"]}>
+          <Kbd
+            className="hidden lg:inline-block bg-default-600/25"
+            keys={["command"]}
+          >
             Ctrl + K
           </Kbd>
         }
-        className="bg-default-700/10 hover:bg-default-700/20 "
+        startContent={<SearchIcon className="text-base flex-shrink-0" />}
         type="button"
+        onPress={onOpen}
       >
         Search
       </Button>
       <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        size="2xl"
-        scrollBehavior="inside"
         classNames={{
           closeButton: "hidden",
           base: ["bg-background", "outline outline-1 outline-white/20"],
         }}
+        isOpen={isOpen}
+        scrollBehavior="inside"
+        size="2xl"
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1">
             <Input
-              autoFocus
-              placeholder="Procure por filmes..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
               classNames={{
                 input: [
                   "bg-transparent",
@@ -82,17 +81,20 @@ export function SearchModal() {
                   "group-data-[focus=true]:bg-transparent",
                 ],
               }}
+              placeholder="Procure por filmes..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </ModalHeader>
           <Divider />
           <ModalBody>
-            <Listbox variant="bordered" color="secondary">
+            <Listbox color="secondary" variant="bordered">
               {movies && (
                 <ListboxSection
                   title={searchQuery ? "Resultados" : "Tendências"}
                 >
                   {movies.map((movie) => (
-                    <ListboxItem href={`/movie/${movie.id}`} key={movie.id}>
+                    <ListboxItem key={movie.id} href={`/movie/${movie.id}`}>
                       {movie.title}
                     </ListboxItem>
                   ))}

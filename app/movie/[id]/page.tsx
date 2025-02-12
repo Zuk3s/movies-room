@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { notFound } from "next/navigation";
+
 import { fetchMovieDetails, fetchMovies } from "@/app/api/movies";
 import CarrouselContainer from "@/components/ui/Container/CarrouselContainer";
 import Container from "@/components/ui/Container/Container";
@@ -5,14 +8,12 @@ import { GenresList } from "@/components/ui/details/genres/GenresList";
 import MovieTrailer from "@/components/ui/Trailer/Trailer";
 import { formatDate, formatRuntime } from "@/libs/utils/utils";
 import { MovieResponse } from "@/types";
-import Image from "next/image";
-import { notFound } from "next/navigation";
 import Overview from "@/components/ui/details/overview/Overview";
 
 async function getMovie(id: string) {
   const movie = await fetchMovieDetails(id);
-  if (!movie) notFound();
 
+  if (!movie) notFound();
   return { movie };
 }
 
@@ -62,12 +63,12 @@ export default async function Page({
         </h1>
         {movie.backdrop_path && (
           <Image
+            alt={movie.title}
+            className="absolute left-0 w-full h-full object-cover filter brightness-50"
+            height={400}
+            loading="lazy"
             src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
             width={3000}
-            height={400}
-            className="absolute left-0 w-full h-full object-cover filter brightness-50"
-            alt={movie.title}
-            loading="lazy"
           />
         )}
       </div>
@@ -76,12 +77,12 @@ export default async function Page({
           {movie.poster_path && (
             <div className="mx-auto flex justify-center w-full min-w-80 sm:w-1/3 md:w-1/4">
               <Image
+                alt={movie.title}
+                className="object-cover rounded-3xl shadow-lg h-auto w-auto"
+                height={450}
+                loading="lazy"
                 src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`}
                 width={300}
-                height={450}
-                alt={movie.title}
-                loading="lazy"
-                className="object-cover rounded-3xl shadow-lg h-auto w-auto"
               />
             </div>
           )}
@@ -104,7 +105,7 @@ export default async function Page({
             </div>
 
             {movie.tagline && (
-              <i className="text-lg text-center">"{movie.tagline}"</i>
+              <i className="text-lg text-center">{`"${movie.tagline}"`}</i>
             )}
           </div>
         </div>
@@ -115,13 +116,13 @@ export default async function Page({
 
         {movie.recommendations.results.length > 0 && (
           <CarrouselContainer
-            title="Recomendados"
             list={movie.recommendations.results}
+            title="Recomendados"
           />
         )}
 
         {movie.similar.results.length > 0 && (
-          <CarrouselContainer title="Similares" list={movie.similar.results} />
+          <CarrouselContainer list={movie.similar.results} title="Similares" />
         )}
       </Container>
     </section>

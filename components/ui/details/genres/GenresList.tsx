@@ -1,7 +1,8 @@
 "use client";
 
-import { GenreResponse } from "@/types";
 import { Chip } from "@heroui/react";
+
+import { GenreResponse } from "@/types";
 
 export function GenresList({ genres }: { genres: GenreResponse[] }) {
   return (
@@ -9,9 +10,9 @@ export function GenresList({ genres }: { genres: GenreResponse[] }) {
       {genres.map((genre) => (
         <Chip
           key={genre.id}
-          variant="flat"
-          color="secondary"
           className=" py-4 text-sm sm:text-base md:px-4 md:py-5"
+          color="secondary"
+          variant="flat"
         >
           {genre.name}
         </Chip>

@@ -6,35 +6,7 @@ import {
   MovieResponse,
   MoviesRequest,
 } from "@/types";
-
-const BASE_URL = "https://api.themoviedb.org/3";
-const DEFAULT_PARAMS = {
-  language: "pt-BR",
-};
-
-async function fetchFromApi(
-  endpoint: string,
-  params: Record<string, any> = {}
-): Promise<any> {
-  const url = new URL(`${BASE_URL}${endpoint}`);
-  Object.entries({ ...DEFAULT_PARAMS, ...params }).forEach(([key, value]) =>
-    url.searchParams.append(key, value)
-  );
-
-  const response = await fetch(url.toString(), {
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN_TMDB}`,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(
-      `Error fetching data: ${response.status} ${response.statusText}`
-    );
-  }
-
-  return response.json();
-}
+import { fetchFromApi } from ".";
 
 export async function fetchMovies(
   params: MoviesRequest
@@ -61,16 +33,19 @@ export async function fetchTrendingMovies(
 }
 
 export async function fetchUpComingMovies(): Promise<Movie[]> {
-  const data = await fetchFromApi("/movie/upcoming");
+  const data: MovieResponse = await fetchFromApi("/movie/upcoming");
+
   return data.results;
 }
 
 export async function fetchPopularMovies(): Promise<Movie[]> {
-  const data = await fetchFromApi("/movie/popular");
+  const data: MovieResponse = await fetchFromApi("/movie/popular");
+
   return data.results;
 }
 
 export async function fetchNowPlayingMovies(): Promise<Movie[]> {
-  const data = await fetchFromApi("/movie/now_playing");
+  const data: MovieResponse = await fetchFromApi("/movie/now_playing");
+
   return data.results;
 }

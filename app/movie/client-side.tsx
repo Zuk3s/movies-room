@@ -1,16 +1,16 @@
 "use client";
 
-import { GenreResponse, MovieResponse, MoviesRequest } from "@/types";
 import { Button } from "@heroui/button";
 import { Select, Selection, SelectItem } from "@heroui/react";
-import { useState } from "react";
-import { fetchMovies } from "../api/movies";
-import ContainerGrid from "@/components/ui/Container/ContainerGrid";
-import NextLink from "next/link";
 import { SharedSelection } from "@heroui/system";
-import Container from "@/components/ui/Container/Container";
-import SimpleCard from "@/components/ui/Card/Card";
+import { useState } from "react";
+import NextLink from "next/link";
+import { fetchMovies } from "../api/movies";
+import { GenreResponse, MovieResponse, MoviesRequest } from "@/types";
 import PaginationCustom from "@/components/ui/Pagination/PaginationCustom";
+import ContainerGrid from "@/components/ui/Container/ContainerGrid";
+import Container from "@/components/ui/Container/Container";
+import { SimpleCard } from "@/components/ui/Card";
 
 interface MoviesClientProps {
   initialGenres: GenreResponse[];
@@ -28,6 +28,7 @@ export default function MovieContent({
 
   const handleSortChange = (keys: SharedSelection) => {
     const newSortBy = Array.from(keys)[0] as string;
+
     setSortBy(newSortBy);
     setCurrentPage(1);
     handleFetchMovies(newSortBy, selectedGenres, 1);
@@ -50,6 +51,7 @@ export default function MovieContent({
       with_genres: Array.from(updatedGenres).join(", "),
     };
     const movies = await fetchMovies(params);
+
     setMovies(movies);
   };
 
@@ -60,27 +62,28 @@ export default function MovieContent({
           className="md:max-w-xs"
           label="Ordenar por"
           selectedKeys={new Set([sortBy])}
-          onSelectionChange={handleSortChange}
           variant="bordered"
+          onSelectionChange={handleSortChange}
         >
           <SelectItem key="popularity.desc">Mais populares</SelectItem>
           <SelectItem key="vote_average.desc">Melhor avaliados</SelectItem>
-          <SelectItem key="release_date.desc">Lançados recentemente</SelectItem>
           <SelectItem key="vote_count.desc">Mais avaliados</SelectItem>
         </Select>
         <Select
           className="md:w-60"
+          items={initialGenres}
           label="Gêneros"
           placeholder="Selecione o gênero"
-          selectionMode="multiple"
           selectedKeys={new Set(selectedGenres)}
-          onSelectionChange={handleGenreChange}
-          items={initialGenres}
+          selectionMode="multiple"
           variant="bordered"
+          onSelectionChange={handleGenreChange}
         >
           {(genre) => <SelectItem key={genre.id}>{genre.name}</SelectItem>}
         </Select>
         <Button
+          color="secondary"
+          isDisabled={Array.from(selectedGenres).length === 0}
           size="lg"
           onPress={() => {
             setSelectedGenres(new Set([]));
@@ -88,8 +91,6 @@ export default function MovieContent({
             setCurrentPage(1);
             handleFetchMovies("popularity.desc", new Set([]), 1);
           }}
-          color="secondary"
-          isDisabled={Array.from(selectedGenres).length === 0}
         >
           Limpar Filtros
         </Button>
@@ -100,9 +101,9 @@ export default function MovieContent({
             <ContainerGrid>
               {movies.results.map((movie) => (
                 <NextLink
-                  href={`/movie/${movie.id}`}
                   key={movie.id}
                   className="w-full h-full"
+                  href={`/movie/${movie.id}`}
                 >
                   <SimpleCard movie={movie} />
                 </NextLink>

@@ -1,7 +1,7 @@
 import { GenreResponse } from "@/types";
-import api from ".";
+import { fetchFromApi } from ".";
 
 export async function fetchGenres(): Promise<GenreResponse[]> {
-  const response = await api.get("/genre/movie/list");
-  return response.data.genres || [];
+  const data = await fetchFromApi("/genre/movie/list");
+  return data.genres;
 }

@@ -1,10 +1,11 @@
-import CarrouselContainer from "@/components/ui/Container/CarrouselContainer";
-import Container from "@/components/ui/Container/Container";
 import {
   fetchUpComingMovies,
   fetchPopularMovies,
   fetchNowPlayingMovies,
 } from "./api/movies";
+
+import CarrouselContainer from "@/components/ui/Container/CarrouselContainer";
+import Container from "@/components/ui/Container/Container";
 
 export default async function Home() {
   const [upComing, popular, nowPlaying] = await Promise.all([
@@ -15,9 +16,9 @@ export default async function Home() {
 
   return (
     <Container className="py-6 space-y-16">
-      <CarrouselContainer title="Populares" list={popular} />
-      <CarrouselContainer title="Nos Cinemas" list={nowPlaying} />
-      <CarrouselContainer title="Em Breve" list={upComing} />
+      <CarrouselContainer list={popular} title="Populares" />
+      <CarrouselContainer list={nowPlaying} title="Nos Cinemas" />
+      <CarrouselContainer list={upComing} title="Em Breve" />
     </Container>
   );
 }
