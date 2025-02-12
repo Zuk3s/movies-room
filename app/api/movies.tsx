@@ -1,15 +1,16 @@
 "use server";
 
+import { fetchFromApi } from "./index";
+
 import {
   Movie,
   MovieDetailsResponse,
   MovieResponse,
   MoviesRequest,
 } from "@/types";
-import { fetchFromApi } from "./index";
 
 export async function fetchMovies(
-  params: MoviesRequest
+  params: MoviesRequest,
 ): Promise<MovieResponse> {
   return fetchFromApi(`/discover/movie`, params);
 }
@@ -19,7 +20,7 @@ export async function fetchMovieQuery(query: string): Promise<MovieResponse> {
 }
 
 export async function fetchMovieDetails(
-  id: string
+  id: string,
 ): Promise<MovieDetailsResponse> {
   return fetchFromApi(`/movie/${id}`, {
     append_to_response: "similar,recommendations,videos,release_dates",
@@ -27,7 +28,7 @@ export async function fetchMovieDetails(
 }
 
 export async function fetchTrendingMovies(
-  time_window: "day" | "week" = "week"
+  time_window: "day" | "week" = "week",
 ): Promise<MovieResponse> {
   return fetchFromApi(`/trending/movie/${time_window}`);
 }

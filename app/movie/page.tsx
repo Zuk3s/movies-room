@@ -1,5 +1,6 @@
 import { fetchMovies } from "../api/movies";
 import { fetchGenres } from "../api/genres";
+
 import MovieContent from "./client-side";
 
 async function getData() {
@@ -15,6 +16,6 @@ export default async function MoviesPage() {
   const { initialGenres, initialMovies } = await getData();
 
   return (
-    <MovieContent initialMovies={initialMovies} initialGenres={initialGenres} />
+    <MovieContent initialGenres={initialGenres} initialMovies={initialMovies} />
   );
 }

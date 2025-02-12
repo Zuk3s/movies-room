@@ -5,7 +5,9 @@ import { Select, Selection, SelectItem } from "@heroui/react";
 import { SharedSelection } from "@heroui/system";
 import { useState } from "react";
 import NextLink from "next/link";
+
 import { fetchMovies } from "../api/movies";
+
 import { GenreResponse, MovieResponse, MoviesRequest } from "@/types";
 import PaginationCustom from "@/components/ui/Pagination/PaginationCustom";
 import ContainerGrid from "@/components/ui/Container/ContainerGrid";
@@ -43,7 +45,7 @@ export default function MovieContent({
   const handleFetchMovies = async (
     updatedSortBy: string = sortBy,
     updatedGenres: Selection = selectedGenres,
-    updatedPage: number = currentPage
+    updatedPage: number = currentPage,
   ) => {
     const params: MoviesRequest = {
       page: updatedPage,

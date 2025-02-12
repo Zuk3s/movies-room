@@ -5,12 +5,12 @@ const DEFAULT_PARAMS = {
 
 export async function fetchFromApi(
   endpoint: string,
-  params: Record<string, any> = {}
+  params: Record<string, any> = {},
 ): Promise<any> {
   const url = new URL(`${BASE_URL}${endpoint}`);
 
   Object.entries({ ...DEFAULT_PARAMS, ...params }).forEach(([key, value]) =>
-    url.searchParams.append(key, value)
+    url.searchParams.append(key, value),
   );
 
   const response = await fetch(url.toString(), {
@@ -21,7 +21,7 @@ export async function fetchFromApi(
 
   if (!response.ok) {
     throw new Error(
-      `Error fetching data: ${response.status} ${response.statusText}`
+      `Error fetching data: ${response.status} ${response.statusText}`,
     );
   }
 
