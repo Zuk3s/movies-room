@@ -6,7 +6,7 @@ import {
   MovieResponse,
   MoviesRequest,
 } from "@/types";
-import { fetchFromApi } from ".";
+import { fetchFromApi } from "./index";
 
 export async function fetchMovies(
   params: MoviesRequest

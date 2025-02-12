@@ -14,6 +14,7 @@ async function getMovie(id: string) {
   const movie = await fetchMovieDetails(id);
 
   if (!movie) notFound();
+
   return { movie };
 }
 
