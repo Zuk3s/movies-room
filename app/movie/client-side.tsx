@@ -9,10 +9,10 @@ import NextLink from "next/link";
 import { fetchMovies } from "../api/movies";
 
 import { GenreResponse, MovieResponse, MoviesRequest } from "@/types";
-import PaginationCustom from "@/components/ui/Pagination/PaginationCustom";
-import ContainerGrid from "@/components/ui/Container/ContainerGrid";
-import Container from "@/components/ui/Container/Container";
-import { SimpleCard } from "@/components/ui/Card";
+import PaginationCustom from "../../components/ui/Pagination/PaginationCustom";
+import ContainerGrid from "../../components/ui/Container/ContainerGrid";
+import Container from "../../components/ui/Container/Container";
+import { SimpleCard } from "../../components/ui/Card";
 
 interface MoviesClientProps {
   initialGenres: GenreResponse[];
@@ -45,7 +45,7 @@ export default function MovieContent({
   const handleFetchMovies = async (
     updatedSortBy: string = sortBy,
     updatedGenres: Selection = selectedGenres,
-    updatedPage: number = currentPage,
+    updatedPage: number = currentPage
   ) => {
     const params: MoviesRequest = {
       page: updatedPage,
