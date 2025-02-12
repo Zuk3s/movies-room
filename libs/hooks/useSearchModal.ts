@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import type { MovieResponse } from "@/types";
+
+import { useState, useEffect } from "react";
+
 import { fetchMovieQuery, fetchTrendingMovies } from "@/app/api/movies";
 
 export function useSearchMovies(query: string) {
@@ -14,8 +16,9 @@ export function useSearchMovies(query: string) {
 
       try {
         let data: MovieResponse;
+
         if (query) {
-          data = await fetchMovieQuery({ query });
+          data = await fetchMovieQuery(query);
         } else {
           data = await fetchTrendingMovies();
         }

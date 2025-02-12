@@ -40,7 +40,6 @@ export type Movie = {
   vote_count: number;
 };
 
-
 export type MovieDetailsResponse = {
   adult: boolean;
   backdrop_path: string;
