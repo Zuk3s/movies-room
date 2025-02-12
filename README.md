@@ -38,7 +38,7 @@ Insira um gif ou um link de alguma demonstração
 - ⬜ Create a user reviews and rating section
 - ⬜ Create about page
 - ⬜ Implement animations on the component card
-- ⬜ Cerate slider component on Home page
+- ⬜ Create slider component on the Home page
 
 ## 🛠️ Tech Stack
 
