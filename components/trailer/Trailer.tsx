@@ -6,7 +6,9 @@ import { useState } from "react";
 import { Video } from "@/types";
 
 export default function Trailer({ videos }: { videos: Video[] }) {
-  const [selectedVideo, setSelectedVideo] = useState<Selection>(new Set([]));
+  const [selectedVideo, setSelectedVideo] = useState<Selection>(
+    new Set([videos[0].key.toString()])
+  );
   const selectedKey = Array.from(selectedVideo)[0];
 
   if (!videos) return <p>Nenhum trailer disponível.</p>;
