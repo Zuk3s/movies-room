@@ -1,8 +1,6 @@
-<!--
-## 📸 Screenshot
+![App Banner](https://github.com/Zuk3s/movies-room/blob/main/public/preview.jpg)
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
--->
+</br>
 
 ![MIT License](https://img.shields.io/badge/License-MIT-brightgreen)
 ![Status](https://img.shields.io/badge/Status-In%20Development-orange)
