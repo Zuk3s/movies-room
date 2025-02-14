@@ -42,6 +42,7 @@ export async function generateMetadata({
       description: movie.overview,
       image: `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`,
     },
+    
   };
 }
 
